@@ -5,18 +5,13 @@
 %componente H del fotograma anterior. Para ello puedes usar las funciones im2frame y
 %movie.
 
-A=imread('Warhol_Marilyn_1967_OnBlueGround.jpg');
-A(:,:,1)=1;
-
-h=rgb2hsv(A);
-%cambiamos la saturacion para ver los distintos valores
-
-clear peli1
-k=1;
-for v=0:0.01:1
-      h(:,:,1)=v;
-      peli1(k)=im2frame(hsv2rgb(h));
-      k=k+1;
+I=imread('Warhol_Marilyn_1967_OnBlueGround.jpg');
+clear peli;
+y=rgb2hsv((I));
+z=y;
+for i=1:255
+    disp(i)
+    z(:,:,1)=mod(y(:,:,1)+i/255.0,0.99);
+    peli(i)=im2frame((hsv2rgb(z)));
 end
-
-mplay(peli1)
+movie(peli);
