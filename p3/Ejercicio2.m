@@ -1,4 +1,5 @@
-% Usa imadjust para aplicar la siguiente función de transferencia a la imagen campo.ppm:
+% Coge una imagen en color y utiliza imadjust o histeq para mejorar
+el contraste. Considera estas posibilidades:
 
 %? Ecualizar por separado cada banda R, G, B.
 

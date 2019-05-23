@@ -1,0 +1,18 @@
+% Read the image
+I = imread('chromakey_original.bmp');
+% Create a mask based on a green channel of the image
+BWmask = ~imbinarize(I(:,:,2));
+BWmask = imfill(BWmask,'holes');
+% Create a masked RGB image
+Imasked = immultiply(I,repmat(BWmask,[1 1 3]));
+% Show the results
+figure
+subplot(2,2,1)
+imshow(I)
+title('Original','FontSize',12)
+subplot(2,2,2)
+imshow(BWmask)
+title('Mask','FontSize',12)
+subplot(2,2,3)
+imshow(Imasked)
+title('Masked RGB','FontSize',12)

@@ -11,5 +11,3 @@ figure,imshow(J2);figure,imshow(J3);figure,imshow(J4);
 %A diferencia de histeq, opera en pequeñas regiones de datos (tiles) en lugar de en toda la imagen. 
 %El contraste de cada mosaico se realza de manera que el histograma de cada región de salida coincida aproximadamente con el histograma 
 %especificado (distribución uniforme por defecto). El realce de contraste puede ser limitado para evitar amplificar el ruido que podría estar presente en la imagen.
-
-%[TODO]
