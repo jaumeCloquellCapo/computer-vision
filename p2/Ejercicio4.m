@@ -1,86 +1,57 @@
-%recordar que hsv el verde es h=0.3333 s=1 v=1 luego 0.5- 0.333= 0.1887
-%entonces mod(hsv(:,:,1)+0.1887,1.0) será 0.5 cuanto más proximo estés al
-%verde luego 1-2*abs(aux-0.5) será 1 cuando estemos tratando el verde.
-%llamar a la funcion chroma key con 
+function Ejercicio4(F, Bg, x, y, R, G, B)
+%Coloca una imagen sobe otra, dando los siguiente parametros:
+% F=imagen de frente
+% Bg=imagen de fondo
+% La imagen se coloca en el vertice inferior izquierdo. x marca el nº de
+% piexeles hacia arriba desde la posición inicial donde se va a colocar la
+% imagen. y marca el número de piexeles hacia la izquierda donde se va a
+% colocar la imagen.
+% R, G y B son los valores del color del chroma en RGB.
 
-F=imread('chromakey_original.jpg');
-B=imread('praga1.jpg');
+F=imread(F);
+Bg=imread(Bg);
 
- scene = B;
- obj = F;
- gs = [0 255 0];
- x = 15;
- y =15;
+% Creamos un RGB uint8 del color verde del chroma y del tamaño del fondo
+unos = ones(size(Bg,1),size(Bg,2),size(Bg,3));
+unos = im2uint8(unos);
+unos(:,:,1) = R;
+unos(:,:,2) = G;
+unos(:,:,3) = B;
 
- [srows scols spg] = size(scene);
- [orows ocols opg] = size(obj);
- 
- % generamos una matrix de zeros del tamaño del background
- pg = zeros(srows,scols,'uint8');
+% Unimos la imagen a colocar y el fondo verde
+loc1 = size(Bg,1)-x-size(F,1)+1:size(Bg,1)-x;
+loc2 = size(Bg,2)-y-size(F,2)+1:size(Bg,2)-y;
+unos(loc1, loc2,:) = F;
 
- % lo ponemos del mismo color que el fondo de la mujer
- canv = cat(3,pg+gs(1),pg+gs(2),pg+gs(3));
- %imshow(canv);
- 
- % ponemos la imagen de la mujer en la posicion definida dentro de la
- % matriz de zeros
- canv(1+y : orows+y, 1+x : ocols+x, :) = obj;
- 
+% Extraemos los canales del RGB
+FR = unos(:,:,1);
+FG = unos(:,:,2);
+FB = unos(:,:,3);
+FY = 0.3*FR+0.59*FG+0.11*FB;
 
-Rx=canv(:,:,1); %figure, imhist(Rx)
-Gx=canv(:,:,2); %figure, imhist(Gx)
-Bx=canv(:,:,3); %figure, imhist(Bx)
+mask = mat2gray(FG-FY) < 80/255;
 
-%mask=findColor(x, 1.1); %Mascara mask=uint8(mask);
-tolerance = 1.1;
-[M,N,t] = size(canv);
-I1 = zeros(M,N); 
-I2 = zeros(M,N);
-I1( find(canv(:,:,2) > tolerance * canv(:,:,1)) ) = 1; 
-I2( find(canv(:,:,2) > tolerance * canv(:,:,3)) ) = 1; 
-%strTitle = 'Color GREEN detected (white areas)'; 
-mask = I1 .* I2;
-mask=uint8(mask);
+% Bucle para cambiar el 255 por 1 (formato uint8)
+mask = im2uint8(mask);
+for i = 1:size(mask, 1)
+    for j = 1:size(mask, 2)
+        if mask(i,j) == 255 
+            mask(i,j) = 1;
+        else
+            mask(i,j) = 0;
+        end
+    end
+end
 
-maski=not(mask); %Mascara Inversa 
-maski=uint8(maski);
+% Finalmente mantenemos canal por canal la imagen delantera (mujer) donde la mascara = 1 y el fondo donde la mascara = 0
+final(:,:,1)=unos(:,:,1).*mask + B(:,:,1).*(1-mask);
+final(:,:,2)=unos(:,:,2).*mask + B(:,:,2).*(1-mask);
+final(:,:,3)=unos(:,:,3).*mask + B(:,:,3).*(1-mask);
+imshow(mat2gray(final));
+end
 
-% Objeto del Foreground a Color
-ckf1=(Rx.*(maski)); %Se multiplica la mascara inversa por el Foreground object
-ckf2=(Gx.*(maski));
-ckf3=(Bx.*(maski));
-%
-[n1 n2 n3 n4]=size(canv);
-%Se agrega el color y se tranforma en matriz 3D 
-ckf=zeros(n1,n2,n3);
-ckf(:,:,1)=uint8(ckf1); 
-ckf(:,:,2)=uint8(ckf2); 
-ckf(:,:,3)=uint8(ckf3); 
-ckf=uint8(ckf);
-imshow(ckf);
 
-canv = ckf;
- 
-%imshow(canv);
- 
- % generamos una secencia de indices de ellementos del canvas cuyo valores
- % sean distintos de 0 (negro RGB (0 0 0))
- ind1 = find(canv(:,:,1) ~= 0);
- ind2 = find(canv(:,:,2) ~= 0);
- ind3 = find(canv(:,:,3) ~= 0);
- 
- %ponemos la mujer en la escena
- canv1 = canv(:,:,1);
- canv2 = canv(:,:,2);
- canv3 = canv(:,:,3);
- 
- scene1 = scene(:,:,1);
- scene2 = scene(:,:,2);
- scene3 = scene(:,:,3);
+        
+    
+    
 
- scene1(ind1) = canv1(ind1);
- scene2(ind2) = canv2(ind2);
- scene3(ind3) = canv3(ind3);
-
- compImage = cat(3,scene1,scene2,scene3);
- imshow(compImage);

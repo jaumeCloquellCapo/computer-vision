@@ -30,7 +30,7 @@ subplot(3,3,1),imshow(I1),title('rostro 1');
 subplot(3,3,2),imshow(I2),title('rostro 2');
 subplot(3,3,3),imshow(I3),title('distorsion');
 
-subplot(3,3,4),imshow(I1Gaussiano(50:100,1:100)),title('gauss 1');
+subplot(3,3,4),imshow(I1Gaussiano),title('gauss 1');
 subplot(3,3,5),imshow(I2Gaussiano),title('gauss 2');
 subplot(3,3,6),imshow(I3Gaussiano),title('gauss');
 

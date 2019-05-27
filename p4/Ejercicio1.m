@@ -1,5 +1,6 @@
 %Compara el resultado que producen el filtrado gaussiano y el filtro de mediana sobre las
 %imágenes disney_r1.png ... disney_r5.png.
+
 I1=imread('disney_r1.png');
 I2=imread('disney_r2.png');
 I3=imread('disney_r3.png');
