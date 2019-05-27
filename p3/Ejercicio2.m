@@ -1,5 +1,4 @@
-% Coge una imagen en color y utiliza imadjust o histeq para mejorar
-el contraste. Considera estas posibilidades:
+% Coge una imagen en color y utiliza imadjust o histeq para mejorar el contraste. Considera estas posibilidades:
 
 %? Ecualizar por separado cada banda R, G, B.
 
