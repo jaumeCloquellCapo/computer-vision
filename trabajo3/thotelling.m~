@@ -2,11 +2,18 @@
 selection = 1;
 
 if (selection == 1)
-    for n = 1:6
-        path = strcat('adra/banda', int2str(n), '.tif');
-        adraImg = imread(path);
-        adraImg = im2double(adraImg);
-        adraImages(:,:,n) = adraImg;
+    %for n = 1:6
+    %    path = strcat('adra/banda', int2str(n), '.tif');
+    %    adraImg = imread(path);
+    %    adraImg = im2double(adraImg);
+    %    adraImages(:,:,n) = adraImg;
+    %end
+    Files=dir('adra');
+    for k=1:length(Files)
+       FileNames=Files(k).name;
+       adraImg = imread(FileNames);
+       adraImg = im2double(adraImg);
+       adraImages(:,:,n) = adraImg;
     end
 else
     index = 1;
@@ -45,6 +52,7 @@ for i = 1:sizeVector(1)
         expectation = expectation + vector' * vector;
     end
 end
+
 expectation = expectation / (sizeVector(1) * sizeVector(2));
 
 %Matriz de Covarianza
