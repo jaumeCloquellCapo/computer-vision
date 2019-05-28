@@ -1,12 +1,23 @@
 %Lecura de las imagenes
-index = 1;
-for n = 'a':'e'
-    path = strcat('camiones/', n, '.jpg');
-    adraImg = imread(path);
-    adraImg = rgb2gray(adraImg);
-    adraImg = im2double(adraImg);
-    adraImages(:,:,index) = adraImg;
-    index = index + 1;
+selection = 1;
+
+if (selection == 1)
+    for n = 1:6
+        path = strcat('adra/banda', int2str(n), '.tif');
+        adraImg = imread(path);
+        adraImg = im2double(adraImg);
+        adraImages(:,:,n) = adraImg;
+    end
+else
+    index = 1;
+    for n = 'a':'e'
+        path = strcat('camiones/', n, '.jpg');
+        adraImg = imread(path);
+        adraImg = rgb2gray(adraImg);
+        adraImg = im2double(adraImg);
+        adraImages(:,:,index) = adraImg;
+        index = index + 1;
+    end
 end
 
 sizeVector = size(adraImages);
@@ -34,6 +45,7 @@ for i = 1:sizeVector(1)
         expectation = expectation + vector' * vector;
     end
 end
+
 expectation = expectation / (sizeVector(1) * sizeVector(2));
 
 %Matriz de Covarianza
@@ -58,10 +70,10 @@ for n = 1:sizeVector(3)
     end
 end
 
-figure, 
-subplot(2,3,1),imshow(newAdraImages(:,:,1));
-subplot(2,3,2), imshow(newAdraImages(:,:,2), []);
-subplot(2,3,3), imshow(newAdraImages(:,:,3), []);
-subplot(2,3,4), imshow(newAdraImages(:,:,4), []);
-subplot(2,3,5), imshow(newAdraImages(:,:,5), []);
-    
+    figure, 
+    subplot(2,3,1),imshow(newAdraImages(:,:,1));
+    subplot(2,3,2), imshow(newAdraImages(:,:,2), []);
+    subplot(2,3,3), imshow(newAdraImages(:,:,3), []);
+    subplot(2,3,4), imshow(newAdraImages(:,:,4), []);
+    subplot(2,3,5), imshow(newAdraImages(:,:,5), []);
+    subplot(2,3,6), imshow(newAdraImages(:,:,6), []);
