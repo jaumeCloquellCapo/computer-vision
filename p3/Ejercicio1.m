@@ -27,14 +27,14 @@ figure,subplot(1,2,1),imshow(I),subplot(1,2,2),imshow(J1);
 %gamma. Comprueba el efecto que produce la transformación
 %en la imagen y en el histograma.
 
-% imadjust(I,[low_in high_in],[low_out high_out],gamma)
-J2 = imadjust(I,[],[],0.5);
+J2 = imadjust(I,[0.3 0.7],[]);
 figure,subplot(1,2,1),imshow(I),subplot(1,2,2),imshow(J2);
 
 %? Usa imadjust para aplicar la siguiente función de transferencia:
 %Finalmente, ecualiza la imagen.
 
-J3 = imadjust(I, [100/255 255/255], [0 255/255], 1);
+ratio = 100/255;
+J3 = imadjust(I, [ratio 255/255], [0 1- ratio], 1);
 Ieq=histeq(J3);
 figure,subplot(1,2,1),imshow(I),subplot(1,2,2),imshow(J3);
 

@@ -11,8 +11,6 @@ IMotion2= imfilter(I,fg);
 fg=fspecial('motion',12,0);
 IMotion3= imfilter(I,fg);
 
-
-
 %fg = fspecial('gaussian',[3,3],0.5);
 IGauss1 = imfilter(I,fspecial('gaussian',[3,3],0.5));
 %fg = fspecial('gaussian',[5,5],0.5);
