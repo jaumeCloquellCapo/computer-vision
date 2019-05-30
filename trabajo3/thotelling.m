@@ -24,7 +24,7 @@ sizeVector = size(adraImages);
 
 
 %Hotelling
-%Mean and expectation mean  of pixel vectors
+%Media y expectación de la media
 mean = zeros(1,sizeVector(3), 'double');
 for i = 1:sizeVector(1)
     for j = 1:sizeVector(2)
@@ -76,3 +76,18 @@ end
     subplot(2,3,4), imshow(newAdraImages(:,:,4), []);
     subplot(2,3,5), imshow(newAdraImages(:,:,5), []);
     subplot(2,3,6), imshow(newAdraImages(:,:,6), []);
+    
+    
+   % Calculamos el error y generamos el plot
+   vectorEigenValues = diag(eigenValues);
+   
+   % Seleccionamos los k autovalores
+   error1 = sum(vectorEigenValues(1:length(vectorEigenValues)));
+   error2 = sum(vectorEigenValues(2:length(vectorEigenValues)));
+   error3 = sum(vectorEigenValues(3:length(vectorEigenValues)));
+   error4 = sum(vectorEigenValues(4:length(vectorEigenValues)));
+   error5 = sum(vectorEigenValues(5:length(vectorEigenValues)));
+   error6 = sum(vectorEigenValues(6:length(vectorEigenValues)));
+
+   bar([error1, error2, error3, error4, error5, error6])
+    

@@ -1,12 +1,4 @@
 function Ejercicio4(F, Bg, x, y, R, G, B)
-%Coloca una imagen sobe otra, dando los siguiente parametros:
-% F=imagen de frente
-% Bg=imagen de fondo
-% La imagen se coloca en el vertice inferior izquierdo. x marca el nº de
-% piexeles hacia arriba desde la posición inicial donde se va a colocar la
-% imagen. y marca el número de piexeles hacia la izquierda donde se va a
-% colocar la imagen.
-% R, G y B son los valores del color del chroma en RGB.
 
 F=imread(F);
 Bg=imread(Bg);
