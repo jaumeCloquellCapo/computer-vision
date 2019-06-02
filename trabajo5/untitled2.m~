@@ -1,0 +1,42 @@
+imds = imageDatastore('images/','IncludeSubfolders',true,'LabelSource',...
+    'foldernames');
+
+[imdsTrain,imdsTest] = splitEachLabel(imds,0.7,'randomize');
+
+imageSize = [128 64];
+image1 = readimage(imdsTrain,1);  
+scaleImage = imresize(image1,imageSize);  
+[features, visualization] = extractHOGFeatures(scaleImage); %features = 3780
+ 
+% imshow(scaleImage);hold on; plot(visualization)  
+
+numImages = length(imdsTrain.Files);  
+featuresTrain = zeros(numImages,size(features,2),'single'); % featuresTrain 
+for i = 1:numImages  
+    imageTrain = readimage(imdsTrain,i);  
+    imageTrain = imresize(imageTrain,imageSize);  
+    featuresTrain(i,:) = extractHOGFeatures(imageTrain);  
+end  
+
+trainLabels = imdsTrain.Labels;  
+svmParams = templateSVM('KernelFunction','rbf', 'KernelScale', 'auto', 'Standardize', 1);
+classifer = fitcecoc(featuresTrain,trainLabels, 'Learners', svmParams, 'Coding', 'onevsall');  
+
+numTest = length(imdsTest.Files);  
+predicted = [];
+original = [];
+predicted = cell(1,numTest);
+original = cell(1,numTest);
+for i = 1:numTest 
+    testImage = readimage(imdsTest,i);  
+    scaleTestImage = imresize(testImage,imageSize);  
+    featureTest = extractHOGFeatures(scaleTestImage);  
+    [predictIndex,score] = predict(classifer,featureTest);  
+    predicted{i} = [predicted predictIndex];
+    original{i} = [original imdsTest.Labels(i)];
+    % figure;imshow(testImage);  
+    % title(['predictImage: ',char(predictIndex)]);  
+end  
+
+
+C = confusionmat(original,predicted);

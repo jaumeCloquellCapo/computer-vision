@@ -3,13 +3,25 @@
 %Mostrar las componentes frecuenciales que entran en un disco de centro u,v y radio r. 
 % Visualizar diferentes discos cambiando el centro y radio.
 
+I_original=imread('cameraman.tif');
+
 
 %Eliminación de ruido. 
 % Sobre la imagen cameraman insertar ruido gaussiano 
 % y mirar que componentes frecuenciales habría que eliminar para reducir el mayor ruido posible.
 %Leemos de nuevo la imagen 
 
-I=imread('cameraman.tif');
+I_original=imread('cameraman.tif');
+
+% añadimos ruido gaussiano 
+sig = 100; 
+V = (sig/256)^2;  
+I_noise = imnoise(I_original,'gaussian',0,V)
+figure, imshow(I_original),title('Imagen Original');
+figure,imshow(I_noise),title('Imagen con ruido');
+
+% Hacemos una copia de la imagen con ruido
+I = I_noise
 
 mi=size(I,1)/2;
 mj=size(I,2)/2;
@@ -36,7 +48,6 @@ figure,imshow(I3),title('Imagen filtrada');
 
 %Realizar sobre la imagen barbara una descomposición wavelet usando bior3.7 con tres niveles. Fijado un porcentaje , por ejemplo 10 %, que  indican el porcentaje de coeficientes que nos quedamos de entre todos los coeficientes wavelets de la descomposición. Estos coeficientes son los que tiene mayor magnitud. 
 %Variar el procentaje y obtener una grafica en la que en el eje X tenemos razon de compresión y en el eje Y el valor de PSNR.
-
 
 clear all
 load wbarb;

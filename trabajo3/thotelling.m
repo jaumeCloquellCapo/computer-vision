@@ -57,7 +57,7 @@ covMatrix = expectation - expectationMean;
 eigenVectors = fliplr(eigenVectors);
 eigenValues = flipud(fliplr(eigenValues));
 
-% Aplicamos sobre los Autovectores la transformada de la siguiente forma y=A(x?mx) para descubrir las nuevas imágenes, 
+% Aplicamos sobre los Autovectores la transformada de la siguiente forma y=A(x-mx) para descubrir las nuevas imágenes, 
 newAdraImages = adraImages;
 for n = 1:sizeVector(3)
     for i = 1:sizeVector(1)
