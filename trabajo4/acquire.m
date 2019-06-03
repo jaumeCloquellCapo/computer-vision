@@ -1,5 +1,4 @@
 function [newdata, y, v, FrameRate] = acquire(video_file)
-video_file = 'data/dedo_hr.mp4';
 if ischar(video_file),
     display(['Loading file ' video_file]);
     v = VideoReader(video_file);
@@ -23,18 +22,13 @@ for i=1:numFrames,
     z(i) = sum(sum(frame(:, :, 3))) / (size(frame, 1) * size(frame, 2));
 end
 
-
-% Primero debemos centrar los datos, es decir, restar las medias univariadas 
-% En los siguientes pasos, por lo tanto, estudiamos las desviaciones de la media (s) solamente.
-
-data = matrix([y, x, z]);
-
+% centramos y normalizamos los datos.
 yi = (y - mean(y)) ./ std(y);
 xi = (x - mean(x)) ./ std(x);
 zi = (z - mean(z)) ./ std(z);
 
+data = transpose([yi; xi; zi]);
 
-data = [yi xi zi];
 %PCA
 
 % A continuación calculamos la matriz de covarianza de los datos. 
@@ -43,9 +37,11 @@ C = cov(data);
 
 % Los valores propios D de la matriz de covarianza, es decir, la versión diagonal de C, da la varianza dentro de los nuevos ejes de coordenadas, es decir, los componentes principales. Ahora calculamos los vectores propios V y los valores propios D de la matriz de covarianza C.
 [V,D] = eig(C);
+[D order] = sort(diag(D), 'descend');
+V = V(:,order);
 
 % Cálculo del conjunto de datos en el nuevo sistema de coordenadas. Necesitamos voltear los datos nuevos hacia la izquierda / derecha ya que la segunda columna es la que tiene el valor propio más grande.
-newdata = V * data';
+newdata = data * V(:,1);
 newdata = newdata';
 FrameRate = v.FrameRate;
 
