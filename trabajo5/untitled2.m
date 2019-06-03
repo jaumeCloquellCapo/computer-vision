@@ -1,8 +1,9 @@
 imds = imageDatastore('images/','IncludeSubfolders',true,'LabelSource',...
     'foldernames');
-
+% dividos los datos en training y test en un 80%
 [imdsTrain,imdsTest] = splitEachLabel(imds,0.8,'randomize');
 
+% los datos debe redimensionarse a tamaño [128 64]
 imageSize = [128 64];
 image1 = readimage(imdsTrain,1);  
 scaleImage = imresize(image1,imageSize);  
@@ -10,7 +11,9 @@ scaleImage = imresize(image1,imageSize);
  
 % imshow(scaleImage);hold on; plot(visualization)  
 
+
 numImages = length(imdsTrain.Files);  
+% generamos un vector con los HOg de cada imagen de training
 featuresTrain = zeros(numImages,size(features,2),'single'); % featuresTrain 
 for i = 1:numImages  
     imageTrain = readimage(imdsTrain,i);  
@@ -19,12 +22,13 @@ for i = 1:numImages
 end  
 
 trainLabels = imdsTrain.Labels;  
-svmParams = templateSVM('KernelFunction','rbf', 'KernelScale', 'auto', 'Standardize', 1);
+%svmParams = templateSVM('KernelFunction','rbf', 'KernelScale', 'auto', 'Standardize', 1);
 %classifer = fitcecoc(featuresTrain,trainLabels, 'Learners', svmParams, 'Coding', 'onevsall');  
 
 classifer = fitcsvm(featuresTrain,trainLabels,'Standardize',true,'KernelFunction','RBF', 'KernelScale','auto');
 numTest = length(imdsTest.Files);  
 
+% Predecimos los datos de test y calculamos la matriz de confusion 
 k = zeros(numTest,1) ;
 j = zeros(numTest,1) ;
 for i = 1:numTest 
