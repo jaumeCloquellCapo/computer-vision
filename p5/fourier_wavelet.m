@@ -3,7 +3,33 @@
 %Mostrar las componentes frecuenciales que entran en un disco de centro u,v y radio r. 
 % Visualizar diferentes discos cambiando el centro y radio.
 
-I_original=imread('cameraman.tif');
+I=imread('cameraman.tif');
+
+mi = size(I,1)/2;
+mj = size(I,2)/2;
+radius = 35;
+
+x=1:size(I,2);
+y=1:size(I,1);
+
+[Y, X]=meshgrid(y-mi,x-mj);
+dist = hypot(X,Y);
+
+
+%creamos el filtro paso bajo
+H=zeros(size(I,1),size(I,2));
+
+ind=ind2sub(size(H), find(dist<=radius));
+H(ind)=1;
+Hd=fftshift(double(H));
+figure, imshow((H)),title('Filtro Paso bajo ideal');
+
+%CONVOLUCION CON EL FILTRO IDEAL EN EL DOMINIO DE FOURIER
+I_dft=fft2(im2double(I));
+DFT_filt=Hd.*I_dft;
+I2=real(ifft2(DFT_filt));
+figure,imshow(log(1+abs(fftshift(DFT_filt))),[]),title('Filtered FT');
+figure,imshow(I2,[]),title('Imagen Filtrada');
 
 
 %Eliminación de ruido. 
