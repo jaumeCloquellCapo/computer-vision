@@ -15,7 +15,6 @@ y=1:size(I,1);
 [Y, X]=meshgrid(y-mi,x-mj);
 dist = hypot(X,Y);
 
-
 %creamos el filtro paso bajo
 H=zeros(size(I,1),size(I,2));
 
@@ -121,10 +120,6 @@ D3img = wcodemat(D3,255);
 A3img = wcodemat(A3,255);
 
 X0 = waverec2(C,S,'bior3.7');
-
-%mat3 = [A3img,V3img;H3img,D3img];
-%mat2 = [mat3,V2img;H2img,D2img];
-%mat1 = [mat2,V1img;H1img,D1img];
 
 imshow(uint8(X0))
 [peaksnr, snr] = psnr(uint8(X0), uint8(X));    fprintf('\n El error psnr es %0.4f', peaksnr);
