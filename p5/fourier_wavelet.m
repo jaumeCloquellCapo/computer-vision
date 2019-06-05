@@ -7,7 +7,7 @@ I=imread('cameraman.tif');
 
 mi = size(I,1)/2;
 mj = size(I,2)/2;
-radius = 35;
+radius = 50;
 
 x=1:size(I,2);
 y=1:size(I,1);
@@ -27,11 +27,13 @@ figure, imshow((H)),title('Filtro Paso bajo ideal');
 I_dft=fft2(im2double(I));
 DFT_filt=Hd.*I_dft;
 I2=real(ifft2(DFT_filt));
+figure,imshow(I),title('Imagen Original');
 figure,imshow(log(1+abs(fftshift(DFT_filt))),[]),title('Filtered FT');
 figure,imshow(I2,[]),title('Imagen Filtrada');
 
 
 %Eliminación de ruido. 
+
 % Sobre la imagen cameraman insertar ruido gaussiano 
 % y mirar que componentes frecuenciales habría que eliminar para reducir el mayor ruido posible.
 %Leemos de nuevo la imagen 
@@ -82,8 +84,9 @@ image(X);colormap(map); colorbar;
 % Calcula la DWT de una imagen.
 [C, S] = wavedec2(X,3,'bior3.7');
 
-% porcentaje de elemento que nos quedamos
-percentage = 10;
+% porcentaje de elemento que nos quedamos. el resto de elemento son
+% asignados a 0
+percentage = 90;
 nEle = percentage * length(C) / 100;
 C([nEle:length(C)]) = 0;
 
@@ -121,7 +124,7 @@ A3img = wcodemat(A3,255);
 
 X0 = waverec2(C,S,'bior3.7');
 
-imshow(uint8(X0))
+figure, imshow(uint8(X0))
 [peaksnr, snr] = psnr(uint8(X0), uint8(X));    fprintf('\n El error psnr es %0.4f', peaksnr);
 %Obtenemos un valor alto de PSNR 25.8675 que significa que la razón señal a
 %ruido es grande. 

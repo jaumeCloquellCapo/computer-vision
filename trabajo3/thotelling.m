@@ -1,5 +1,5 @@
 %Lecura de las imagenes
-selection = 1;
+selection = 2;
 
 if (selection == 1)
     for n = 1:6
@@ -75,19 +75,25 @@ end
     subplot(2,3,3), imshow(newAdraImages(:,:,3), []);
     subplot(2,3,4), imshow(newAdraImages(:,:,4), []);
     subplot(2,3,5), imshow(newAdraImages(:,:,5), []);
-    subplot(2,3,6), imshow(newAdraImages(:,:,6), []);
+    if (selection == 1)
+        subplot(2,3,6), imshow(newAdraImages(:,:,6), []);
+    end
     
     
    % Calculamos el error y generamos el plot
-   vectorEigenValues = diag(eigenValues);
+   diagonal = diag(eigenValues);
    
+   nEl = 5;
+if (selection == 1)
+  nEl = 6;
+end
    % Seleccionamos los k autovalores
-   error1 = sum(vectorEigenValues(1:length(vectorEigenValues)));
-   error2 = sum(vectorEigenValues(2:length(vectorEigenValues)));
-   error3 = sum(vectorEigenValues(3:length(vectorEigenValues)));
-   error4 = sum(vectorEigenValues(4:length(vectorEigenValues)));
-   error5 = sum(vectorEigenValues(5:length(vectorEigenValues)));
-   error6 = sum(vectorEigenValues(6:length(vectorEigenValues)));
+   errors = zeros(nEl);
 
-   bar([error1, error2, error3, error4, error5, error6])
+for i = 1:nEl
+    errors(i) = sum(diagonal(1:(nEl-i)));
+end
+
+%plot the errors
+figure, plot(1:nEl,errors);
     
