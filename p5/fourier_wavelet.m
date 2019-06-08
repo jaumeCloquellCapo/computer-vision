@@ -43,7 +43,7 @@ I_original=imread('cameraman.tif');
 % añadimos ruido gaussiano 
 sig = 100; 
 V = (sig/256)^2;  
-I_noise = imnoise(I_original,'gaussian',0,V)
+I_noise = imnoise(I_original,'gaussian',0,V);
 figure, imshow(I_original),title('Imagen Original');
 figure,imshow(I_noise),title('Imagen con ruido');
 

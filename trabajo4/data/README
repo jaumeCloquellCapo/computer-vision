@@ -1,7 +1,3 @@
-Descripción de los Ficheros
+Descarga de videos
 ---------------------------
- *dedo_hr.mp4: video filmando un dedo puesto sobre la lente de una Cámra de Samsung S7.
- *f1.png y f10:png. dos fotogramas del video dedo_hr.mp4
- *latidos.png: grafico mostrando la magnitud de la transoformada de fourier de la señal brillo y el hr obtenido a lo largo del tiempo
- *latidos_tresbandas.png: grafico mostrando la magnitud de la transformada de fourier( usando para el proceso
- las tres bandas de color y usando PCA para definir la información más importante) y el hr obtenido a lo largo del tiempo
+Debido al tamaño de los videos, a sido imposible subirlos al PRADO.

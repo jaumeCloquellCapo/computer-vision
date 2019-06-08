@@ -63,5 +63,9 @@ subplot(4,3,12),imshow(IGauss6),title('IGauss6 [3,3],9');
 %entrada por el valor mediano de los puntos que están incluidos dentro de una
 %ventana entorno. 
 
+hsvI = rgb2hsv(I);
+Imd = hsv2rgb(cat(3,medfilt2(hsvI(:,:,1),[7 7]),medfilt2(hsvI(:,:,2),[7 7]),medfilt2(hsvI(:,:,3),[7 7])));
+
+figure, imshow(Imd),title('Filtro mediana'),
 
 
