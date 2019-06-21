@@ -19,22 +19,22 @@ Coge una imagen en color y utiliza imadjust o histeq para mejorarel contraste
 Usa imadjust para aplicar la siguiente función de transferencia a la imagen campo.ppm
 Aplica distintas técnicas de mejora de contraste sobre la imagen
 
-##Practica 4: Convolución. Filtrado
+## Practica 4: Convolución. Filtrado
 Utiliza la correlación para buscar formas en una imagen
 Analizar   la   imagen   distorsion1.jpg   y   aplicar   diferentes   técnicas   para   mejorarla(eliminación del ruido). En concreto, prueba con suavizados gaussianos y con el filtro'motion' de Matlab.
 método de Harris.
 
-##Practica 5.- Fourier y Wavelets
+## Practica 5.- Fourier y Wavelets
 
-###Parte 1.-Fourier. Eliminación de Ruido.
+### Parte 1.-Fourier. Eliminación de Ruido.
 Mostrar las componentes frecuenciales que entran en un disco de centro u,v y radio r. Visualizar diferentes discos cambiando el centro y radio.
 
 Eliminación de ruido. Sobre la imagen cameraman insertar ruido gaussiano y mirar que componentes frecuenciales habría que eliminar para reducir el mayor ruido posible.
 
-###Parte 2.- Ejercicio Compresión usando Wavelet.
+### Parte 2.- Ejercicio Compresión usando Wavelet.
 Realizar sobre la imagen barbara una descomposición wavelet usando bior3.7 con tres niveles.
 
-#Trabajo 2.- Lo que oculta una imagen
-##Trabajo 3.-Transformada Hotelling. Imágenes Satélite
-##Trabajo 4.-Número de latidos del corazón por minuto a partir de un vídeo
-##Trabajo 5.- Detección de Peatones
+## Trabajo 2.- Lo que oculta una imagen
+## Trabajo 3.-Transformada Hotelling. Imágenes Satélite
+## Trabajo 4.-Número de latidos del corazón por minuto a partir de un vídeo
+## Trabajo 5.- Detección de Peatones
