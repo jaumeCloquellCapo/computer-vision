@@ -25,17 +25,16 @@ Analizar   la   imagen   distorsion1.jpg   y   aplicar   diferentes   técnicas 
 método de Harris.
 
 ##Practica 5.- Fourier y Wavelets
-Parte 1.-Fourier. Eliminación de Ruido.
 
-    Mostrar las componentes frecuenciales que entran en un disco de centro u,v y radio r. Visualizar diferentes discos cambiando el centro y radio.
-    Eliminación de ruido. Sobre la imagen cameraman insertar ruido gaussiano y mirar que componentes frecuenciales habría que eliminar para reducir el mayor ruido posible.
+###Parte 1.-Fourier. Eliminación de Ruido.
+Mostrar las componentes frecuenciales que entran en un disco de centro u,v y radio r. Visualizar diferentes discos cambiando el centro y radio.
 
-Parte 2.- Ejercicio Compresión usando Wavelet.
+Eliminación de ruido. Sobre la imagen cameraman insertar ruido gaussiano y mirar que componentes frecuenciales habría que eliminar para reducir el mayor ruido posible.
 
-Realizar sobre la imagen barbara una descomposición wavelet usando bior3.7 con tres niveles. Fijado un porcentaje , por ejemplo 10 %, que  indican el porcentaje de coeficientes que nos quedamos de entre todos los coeficientes wavelets de la descomposición. Estos coeficientes son los que tiene mayor magnitud.
-Variar el procentaje y obtener una grafica en la que en el eje X tenemos razon de compresión y en el eje Y el valor de PSNR.
-##Trabajo 2.- Lo que oculta una imagen
+###Parte 2.- Ejercicio Compresión usando Wavelet.
+Realizar sobre la imagen barbara una descomposición wavelet usando bior3.7 con tres niveles.
 
+#Trabajo 2.- Lo que oculta una imagen
 ##Trabajo 3.-Transformada Hotelling. Imágenes Satélite
 ##Trabajo 4.-Número de latidos del corazón por minuto a partir de un vídeo
 ##Trabajo 5.- Detección de Peatones
