@@ -1,7 +1,7 @@
-# computer-vision
+# Contenido
 Repositorio para los contenidos y trabajos de la asignatura "Visión por computador" del máster en ciencia de datos e ingeniería de computadores. 
 
-#Structure
+# Estructua
 
 ## Práctica 1.- Introducción 
 Probar los distintos visualizadores de que disponemos en Matlab (imshow, imtool,imagesc)
